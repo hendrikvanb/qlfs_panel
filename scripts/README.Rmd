@@ -1,0 +1,64 @@
+---
+title: "Scripts"
+author: "Hendrik van Broekhuizen"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  github_document:
+    toc: true
+    toc_depth: 2
+    fig_width: 8
+    fig_height: 4
+    dev: svg
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = 'center', dev = 'svg', fig.width = 8, fig.height = 4)
+
+```
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+# load libaries
+library(tidyverse)
+
+
+# function to extract metadata from scripts
+my.metadata <- function(filename, caption = '') {
+  metadata <- data.frame(line = readLines(filename)) %>% 
+  mutate(group = ifelse(line == '' & lag(line) != '', 1, 0) %>% cumsum()) %>% 
+  filter(grepl('^# ', line) & group %in% c(0, 1)) %>% 
+  mutate(line = line %>% 
+           gsub('^# ', '', .) %>% 
+           gsub('^METADATA.*$', '', .)) %>%
+  filter(line != '') %>% 
+  separate(line, into = c('header', 'string'), sep = ': ', fill = 'left') %>% 
+  mutate(header = header %>% stringr::str_to_title()) %>% 
+  group_by(group) %>% 
+  mutate(string = ifelse(group == 1, paste0(string, collapse = ' '), string)) %>% 
+  ungroup() %>% 
+  filter(header != '') %>% 
+  mutate(printstring = paste0('- **', header, ':** ', string)) %>% 
+  select(printstring) 
+  
+  if (caption != '') {
+    metadata <- metadata %>% 
+      add_row(printstring = paste(caption, '\n'), .before = 1)
+  }
+  
+  metadata  %>% 
+    add_row(printstring = '\n') %>% 
+    .[[1]] %>%
+    cat(fill = T)
+}
+
+
+```
+
+The `data/processed/qlfs_panel.RDS` dataset can be created/updated by executing the following scripts in the indicated order: 
+
+```{r echo=F, results='asis'}
+my.metadata('scripts/create_qlfs_pooled.R', '### `create_qlfs_pooled.R`')
+my.metadata('scripts/create_lmd_pooled.R', '### `create_lmd_pooled.R`')
+my.metadata('scripts/create_cpi.R', '### `create_cpi.R`')
+my.metadata('scripts/create_qlfs_panel.R', '### `create_qlfs_panel.R`')
+```
+
