@@ -69,7 +69,7 @@ df <- df %>%
             by = c('survey_date', 'uqno', 'personno', 'q14age'))
 
 # join in selected variables from cpi by reading directly from rds file
-x <- df %>% 
+df <- df %>% 
   left_join(readRDS('data/processed/cpi.RDS'), 
             by = c('survey_date'))
 

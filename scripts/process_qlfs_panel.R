@@ -57,7 +57,7 @@ df <- df %>% filter(respondent_waves > 1)
 df <- df %>% 
   select(survey_date, uqno, personno, respondent_waves, respondent_wave,
          province, hhsize, children_15, children_18, q13gender:q20selfrespond,  
-         education_status, status, status_exp, unempl_status, 
+         education_status, status, status_exp, unempl_status, cpi_2010, cpi_deflator_current,
          indus:hrswrk, q415typebusns, q412bmemunion, job_start_date, tenure, 
          earnings:hh_imputed_median_earnings, q18field, q110edui, 
          q52salaryinterval, q56salaryinterval, q58salarycategory)
