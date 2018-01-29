@@ -53,12 +53,13 @@ my.metadata <- function(filename, caption = '') {
 
 ```
 
-The `data/processed/qlfs_panel.RDS` dataset can be created/updated by executing the following scripts in the indicated order: 
+Users can create the processed version of the _QLFS panel data_ contained in `data/processed/qlfs_panel.RDS` by executing the `.R` scripts in this folder in the following order^[Note that `data/processed/qlfs_panel.RDS` contains only a subset of the variables from the _QLFS_ data.  Users wishing to expand/alter this subset will need to edit the `scripts/process_qlfs_panel.R` script.]: 
 
-```{r echo=F, results='asis'}
-my.metadata('scripts/create_qlfs_pooled.R', '### `create_qlfs_pooled.R`')
-my.metadata('scripts/create_lmd_pooled.R', '### `create_lmd_pooled.R`')
-my.metadata('scripts/create_cpi.R', '### `create_cpi.R`')
-my.metadata('scripts/create_qlfs_panel.R', '### `create_qlfs_panel.R`')
+```{r echo=F, message=FALSE, warning=FALSE, results='asis'}
+my.metadata('scripts/create_qlfs_pooled.R', '### 1.`create_qlfs_pooled.R`')
+my.metadata('scripts/create_lmd_pooled.R', '### 2.`create_lmd_pooled.R`')
+my.metadata('scripts/create_cpi.R', '### 3.`create_cpi.R`')
+my.metadata('scripts/create_qlfs_panel.R', '### 4.`create_qlfs_panel.R`')
+my.metadata('scripts/process_qlfs_panel.R', '### 5.`process_qlfs_panel.R`')
 ```
 
