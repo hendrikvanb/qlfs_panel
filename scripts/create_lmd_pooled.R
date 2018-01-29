@@ -4,7 +4,7 @@
 # Last edit: 2018-01-24 (Hendrik van Broekhuizen)
 # Last review: NA
 
-# NOTES: This script creates data/temp/lmd_pooled.RDS by importing and
+# SUMMARY: This script creates data/temp/lmd_pooled.RDS by importing and
 # appending various waves of LMD data (stored in .dta Stata format) contained
 # in data/raw.  Minimal value cleaning and variable type conversion processing
 # is applied to reduce the size of the resultant .RDS file.
