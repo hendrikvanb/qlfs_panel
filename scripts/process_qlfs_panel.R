@@ -1,7 +1,7 @@
 # METADATA ====
 # Description: Process QLFS panel data 
 # Created: 2018-01-26 (Hendrik van Broekhuizen)
-# Last edit: 2018-01-29 (Hendrik van Broekhuizen)
+# Last edit: 2018-02-05 (Hendrik van Broekhuizen)
 # Last review: NA
 
 # SUMMARY: This script creates `data/processed/qlfs_panel.RDS` by processing
@@ -60,7 +60,7 @@ df <- df %>%
          education_status, status, status_exp, unempl_status, cpi_2010, cpi_deflator_current,
          indus:hrswrk, q415typebusns, q412bmemunion, job_start_date, tenure, 
          earnings:hh_imputed_median_earnings, q18field, q110edui, 
-         q52salaryinterval, q56salaryinterval, q58salarycategory)
+         q52salaryinterval, q56salaryinterval, q58salarycategory, q411contracttype, q412contrduration)
 
 # rename columns (to be more user friendly)
 df <- df %>% 
@@ -74,7 +74,9 @@ df <- df %>%
          field_of_study = q18field,
          educ_institution = q110edui,
          sector = q415typebusns,
-         hours = hrswrk
+         hours = hrswrk,
+         written_contract = q411contracttype,
+         contract_duration = q412contrduration
          )
 
 
